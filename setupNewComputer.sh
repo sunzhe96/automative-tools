@@ -9,6 +9,7 @@ sudo apt upgrade -y
 
 ### emacs ###
 sudo add-apt-repository ppa:kelleyk/emacs -y
+sudo apt update
 sudo apt install emacs27 -y
 
 ### vs code ###
@@ -22,6 +23,12 @@ sudo apt install fcitx-sunpinyin -y
 
 ###  racket ###
 sudo apt install racket -y
+
+### R ###
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+sudo apt update
+sudo apt install r-base r-base-dev
 
 ### Git Config ###
 echo -n "Enter the global user for Git: "
@@ -39,5 +46,3 @@ sudo apt install zsh -y
 chsh --shell $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-### reboot ###
-reboot
