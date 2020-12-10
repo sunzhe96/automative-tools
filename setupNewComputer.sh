@@ -24,19 +24,22 @@ sudo apt install fcitx-sunpinyin -y
 ###  racket ###
 sudo apt install racket -y
 
-### R ###
+### r ###
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt update
 sudo apt install r-base r-base-dev -y
 
+### rstudio ###
 curl "https://rstudio.com/products/rstudio/download/#download" > rstudioDownload.html
-rstudioPackage = $(cat test.html | grep -n bionic | head -1 |awk -F"\"" {'print $2'})
+rstudioPackage=$(cat rstudioDownload.html | grep -n bionic | head -1 |awk -F"\"" {'print $2'}) 
 wget -O rstudio.deb "$rstudioPackage"
+sudo apt install libclang-dev
+sudo apt --fix-broken install -y
 sudo dpkg -i rstudio.deb
 rm rstudio*
 
-### Git Config ###
+### git config ###
 echo -n "Enter the global user for Git: "
 read GITUSER
 git config --global user.name "${GITUSER}"
@@ -47,7 +50,7 @@ git config --global user.email "${GITEMAIL}"
 
 git config --global alias.co checkout
 
-### Oh-My-Zsh ###
+### oh-my-zsh ###
 sudo apt install zsh -y
 chsh --shell $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
