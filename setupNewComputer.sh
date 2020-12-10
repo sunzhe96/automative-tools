@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+### change apt mirror ###
+sudo sed -i 's/us/tw/g' f /etc/apt/sources.list
+
 ### update all the software ###
 sudo apt update
 sudo apt upgrade -y
