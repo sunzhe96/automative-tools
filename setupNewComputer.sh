@@ -30,6 +30,12 @@ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-
 sudo apt update
 sudo apt install r-base r-base-dev -y
 
+curl "https://rstudio.com/products/rstudio/download/#download" > rstudioDownload.html
+rstudioPackage = $(cat test.html | grep -n bionic | head -1 |awk -F"\"" {'print $2'})
+wget -O rstudio.deb "$rstudioPackage"
+sudo dpkg -i rstudio.deb
+rm rstudio*
+
 ### Git Config ###
 echo -n "Enter the global user for Git: "
 read GITUSER
