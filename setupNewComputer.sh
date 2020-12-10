@@ -1,4 +1,4 @@
-#!bin/bash
+#!/usr/bin/bash
 
 ### update all the software ###
 sudo apt update
@@ -13,11 +13,6 @@ sudo apt install code -y
 
 ### golang ###
 sudo apt install golang -y
-
-### Oh-My-Zsh ###
-sudo apt install zsh -y
-chsh --shell $(which zsh)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ### sunpinyi ###
 sudo apt install fcitx-sunpinyin -y
@@ -35,6 +30,11 @@ read GITEMAIL
 git config --global user.email "${GITEMAIL}"
 
 git config --global alias.co checkout
+
+### Oh-My-Zsh ###
+sudo apt install zsh -y
+chsh --shell $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ### reboot ###
 reboot
