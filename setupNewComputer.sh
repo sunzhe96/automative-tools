@@ -21,11 +21,11 @@ sudo apt install fcitx-sunpinyin -y
 sudo apt install racket -y
 
 ### Git Config ###
-echo -n "Enter the global user for Git"
+echo -n "Enter the global user for Git: "
 read GITUSER
 git config --global user.name "${GITUSER}"
 
-echo -n "Enter the global user emacs for Git"
+echo -n "Enter the global user emacs for Git: "
 read GITEMAIL
 git config --global user.email "${GITEMAIL}"
 
