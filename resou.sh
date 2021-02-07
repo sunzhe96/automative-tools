@@ -1,23 +1,25 @@
 #!/bin/bash
 
-head=$"https://s.weibo.com/"
-resou=$"https://s.weibo.com/top/summary?cate=realtimehot"
+head="https://s.weibo.com/"
+resou="https://s.weibo.com/top/summary?cate=realtimehot"
 
-curl -o resou.html "$resou"
+html=$(curl "$resou")
 
-grep href=\"/weibo resou.html | awk -F ">" '{ print NR " " $2 }' | sed 's/<*\/a//' > topics
-grep href=\"/weibo resou.html | awk -F " " '{ print $2 }' | awk -v head="$head" -F "\"" '{ print head $2 }' > links
-cat topics
+topics=$(echo "$html" | grep "href=\"/weibo" | awk -F ">" '{ print NR " " $2 }' | sed 's/<*\/a//')
+links=$(echo "$html" | grep "href=\"/weibo" | awk -F " " '{ print $2 }' | awk -v head="$head" -F "\"" '{ print head $2 }')
 
-read -p "Enter topic number [any letter to quit]: " answer
+echo "$topics"
 
-if [[ "${answer}" =~ ^[1-9]$|^[1-4][0-9]$|^5[0-1]$ ]]
-then
-    topic_chose=$(paste topics links | awk -v line="$answer" 'FNR == line { print $3 }')
-else
-    rm topics links resou.html && exit 0
-fi
+while :
+do
+    read -p "Enter topic number [any letter to quit]: " answer
+    if [[ "$answer" =~ ^[1-9]$|^[1-4][0-9]$|^5[0-1]$ ]]
+    then
+	topic_chose=$(echo "$links" | head -n "$answer" | tail -n 1 )
+	firefox "$topic_chose"    
+    else
+	 exit 0
+    fi
+done
 
-firefox "$topic_chose"    
-rm topics links resou.html
-
+exit 0
