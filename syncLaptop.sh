@@ -1,7 +1,23 @@
 #!/bin/bash
 
+
 mount_point=$(lsblk | grep sd |sed -n '2 p' | awk -F" " {'print $7'})
 backup_dir="$mount_point/sz96-backup"
+
+if [[ -z "$mount_point" ]]
+then
+    read -sr -n 1 -p "Do you want to mount your backup device(Y/n)" ans
+    printf "\n"
+    case "$ans" in
+	y|Y )
+	    device=$(lsblk | grep part | grep sd | awk {'print $1'} | awk -F"└─" {'print $2'})
+	    sudo mount "/dev/$device" ~/media/
+	    mount_point=$(lsblk | grep sd |sed -n '2 p' | awk -F" " {'print $7'})
+	    backup_dir="$mount_point/sz96-backup";;
+	* )
+	    echo "No available backup device. Exit program." && exit 0;;
+    esac
+fi
 
 rsync -auvzP ~/Documents ~/org-roam ~/Audio ~/.emacs.d ~/Dropbox $backup_dir --delete
 
