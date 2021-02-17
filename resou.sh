@@ -16,7 +16,7 @@ do
     if [[ "$answer" =~ ^[1-9]$|^[1-4][0-9]$|^5[0-1]$ ]]
     then
 	topic_chose=$(echo "$links" | head -n "$answer" | tail -n 1 )
-	firefox "$topic_chose"    
+	brave-browser "$topic_chose"    
     else
 	 exit 0
     fi
