@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rsync -auvzP --delete ~/Documents/website/sunzhe.info/ root@sunzhe.info:/var/www/sunzhe.info/
+rsync -auvzP --delete ~/Documents/website/sunzhe.co/ root@sunzhe.co:/var/www/sunzhe.co/
