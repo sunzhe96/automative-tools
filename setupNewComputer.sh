@@ -3,6 +3,18 @@
 ### change apt mirror ###
 sudo sed -i 's/us/tw/g' /etc/apt/sources.list
 
+### git config ###
+echo -n "Enter the global user for Git: "
+read GITUSER
+git config --global user.name "${GITUSER}"
+
+echo -n "Enter the global user emacs for Git: "
+read GITEMAIL
+git config --global user.email "${GITEMAIL}"
+git config --global alias.b status
+git config --global alias.co checkout
+git config --global alias.st status
+
 ### update all the software ###
 sudo apt update
 sudo apt upgrade -y
@@ -11,6 +23,11 @@ sudo apt upgrade -y
 sudo add-apt-repository ppa:kelleyk/emacs -y
 sudo apt update
 sudo apt install emacs27 -y
+## dependencies for emacs packages ##
+sudo apt install fonts-hack -y
+sudo apt install sqlite -y
+## install my config ##
+git clone git@github.com:sunzhe96/.emacs.d.git "$HOME/.emacs.d"
 
 ### vs code ###
 sudo apt install code -y
@@ -29,26 +46,6 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt update
 sudo apt install r-base r-base-dev -y
-
-### rstudio ###
-curl "https://rstudio.com/products/rstudio/download/#download" > rstudioDownload.html
-rstudioPackage=$(cat rstudioDownload.html | grep -n bionic | head -1 |awk -F"\"" {'print $2'}) 
-wget -O rstudio.deb "$rstudioPackage"
-sudo apt install libclang-dev
-sudo apt --fix-broken install -y
-sudo dpkg -i rstudio.deb
-rm rstudio*
-
-### git config ###
-echo -n "Enter the global user for Git: "
-read GITUSER
-git config --global user.name "${GITUSER}"
-
-echo -n "Enter the global user emacs for Git: "
-read GITEMAIL
-git config --global user.email "${GITEMAIL}"
-
-git config --global alias.co checkout
 
 ### oh-my-zsh ###
 sudo apt install zsh -y
