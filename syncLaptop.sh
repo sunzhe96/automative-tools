@@ -3,7 +3,7 @@
 
 mount_point=$(lsblk | grep sd |sed -n '2 p' | awk -F" " {'print $7'})
 backup_dir="$mount_point/sz96-backup"
-backup_list="$HOME/Documents $HOME/org-roam $HOME/Audio $HOME/.emacs.d $HOME/Dropbox $HOME/projects"
+backup_list="$HOME/Documents $HOME/org-roam $HOME/Audio $HOME/.emacs.d $HOME/projects"
 
 if [[ -z "$mount_point" ]]
 then
@@ -20,7 +20,7 @@ then
     esac
 fi
 
-rsync -auvzP $backup_list $backup_dir --delete
+rsync -auvzP --delete $backup_list $backup_dir
 
 read -sr -n 1 -p "Do you want to umount the backup device?(Y/n)" choice
 printf "\n"
