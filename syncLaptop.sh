@@ -21,6 +21,10 @@ then
 fi
 
 rsync -auvzP --delete $backup_list $backup_dir
+if [[ "$(ls -A $HOME/arts)" ]]
+then
+    mv -v $HOME/arts/* "$backup_dir/arts";
+fi
 
 read -sr -n 1 -p "Do you want to umount the backup device?(Y/n)" choice
 printf "\n"
