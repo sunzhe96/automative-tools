@@ -1,9 +1,8 @@
 #!/bin/bash
 
-
 mount_point=$(lsblk | grep sd |sed -n '2 p' | awk -F" " {'print $7'})
 backup_dir="$mount_point/sz96-backup"
-backup_list="$HOME/Documents $HOME/org-roam $HOME/Audio $HOME/.emacs.d $HOME/projects $HOME/Pictures $HOME/Videos"
+backup_list="$HOME/Documents $HOME/Audio $HOME/.emacs.d $HOME/projects $HOME/Pictures $HOME/Videos"
 
 if [[ -z "$mount_point" ]]
 then
