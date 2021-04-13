@@ -1,3 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
-rsync -auvzP --delete ~/projects/sunzhe.info/public/ root@sunzhe.info:/var/www/sunzhe.info/
+domain="sunzhe.info"
+localDir="$HOME/projects/sunzhe.info/public/"
+serverDir="/var/www/sunzhe.info/"
+
+rsync -auvzP --delete "$localDir" root@"$domain":"$serverDir"
